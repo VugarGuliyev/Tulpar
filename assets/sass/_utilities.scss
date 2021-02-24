@@ -1,0 +1,417 @@
+// FONT VARIABLES
+
+@font-face {
+    font-family: TTHoves400;
+    src: url(../font/TTHoves400.otf);
+}
+
+@font-face {
+    font-family: TTHoves500;
+    src: url(../font/TTHoves500.otf);
+}
+
+@font-face {
+    font-family: TTHoves600;
+    src: url(../font/TTHoves600.otf);
+}
+
+@font-face {
+    font-family: TTHoves800;
+    src: url(../font/TTHoves800.otf);
+}
+
+$font400: TTHoves400;
+$font500: TTHoves500;
+$font600: TTHoves600;
+$font800: TTHoves800;
+
+
+
+// COLOR VARIABLES
+
+$color-red: #E95258;
+$color-dark-blue: #32495E;
+$color-light-blue: #8093AC;
+$color-white: #f9f9f9;
+$color-rectangle: #F3F5FA;
+$color-layer: #C4C4C4;
+$color-menu: #2B3946;
+$color-footer: #333333;
+
+
+
+// CONTAINER CLASS
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 70px 0;
+}
+
+
+
+// SECTION HEADING CLASSES
+
+.h1-blue {
+    @include font-details($font800, 44px, $color-dark-blue);
+    text-transform: uppercase;
+}
+
+.h1-white {
+    @include font-details($font800, 44px, $color-white);
+    text-transform: uppercase;
+}
+
+
+
+// COMMON CONTENT PROPERTY CLASSES
+
+.h2-blue { @include font-details($font800, 16px, $color-dark-blue); }
+.h2-white { @include font-details($font800, 16px, $color-white); }
+
+.p-blue { @include font-details($font400, 14px, $color-dark-blue); }
+.p-white { @include font-details($font400, 14px, $color-white); }
+
+.a-blue { @include font-details($font500, 14px, $color-dark-blue); }
+.a-white { @include font-details($font500, 14px, $color-white); }
+
+
+
+// MENU CLASS
+
+%menu {
+    display: flex;
+
+    & > li {
+        &:not(:last-child) { margin-right: 40px; }
+
+        & a { @extend .a-white; }
+
+        & > a {
+            position: relative;
+            transition: all .2s;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 110%;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background-color: $color-white;
+                border-radius: 1px;
+                transition: all .2s;
+            }
+
+            &:hover::after { width: 100%; }
+        }
+    }
+}
+
+.nav-menu {
+    @extend %menu;
+
+    & > li i {
+        vertical-align: middle;
+        margin-left: 5px;
+        transition: all .2s;
+    }
+
+    & > li:hover i { transform: rotate(360deg); }
+    & > li:last-child > .dropdown { left: -80px; }
+
+    .relative { position: relative; }
+    .relative:hover > .dropdown { display: block; }
+
+    .dropdown {
+        width: 120px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 10px 10px rgba(0,0,0,.5); 
+        display: none;
+
+        a {
+            display: block;
+            padding: 10px;
+            color: $color-dark-blue;
+            background-color: $color-white;
+            transition: all .2s;
+
+            &:hover {
+                background-color: $color-dark-blue;
+                color: $color-white;
+            }
+        }
+    }
+}
+
+.section-menu {
+    @extend %menu;
+
+    a:hover { font-weight: bold; }
+    a:focus { font-weight: bold; }
+    a:focus::after { width: 100%; }
+}
+
+
+
+// BUTTON CLASSES
+
+%btn {
+    display: inline-block;
+    padding: 16px 44px;
+    border-radius: 24px;
+    transition: all .2s;
+
+    &:hover {
+        background-color: $color-dark-blue;
+        color: $color-white;
+        border-color: $color-dark-blue;
+        box-shadow: 0 4px 16px rgba(0,0,0,.5);
+    }
+
+    &:active { box-shadow: 0 1px 16px rgba(0,0,0,.5); }
+}
+
+.button-white {
+    @extend %btn;
+    @extend .a-white;
+    border: 1px solid $color-white;
+}
+
+.button-blue {
+    @extend %btn;
+    @extend .a-blue;
+    border: 1px solid $color-dark-blue;
+}
+
+
+
+// GRID
+
+.col-3 { width: 25%; }
+.col-6 { width: 50%; }
+
+
+
+// TEXT-ALIGN CENTER
+
+.text-center { text-align: center; }
+
+
+
+// FLEX CLASSES
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+// IMAGE-LAYER CLASS
+
+.layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all .2s;
+}
+
+
+
+// SOCIAL-LINK CLASSES
+
+.social-button {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 90px;
+    cursor: pointer;
+    visibility: hidden;
+    z-index: 198;
+
+    .image-outer {
+        height: 100%;
+        border: 1px solid white;
+        border-radius: 50%;
+        position: relative;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+
+        &::after {
+            content: '';
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            border-radius: 50%;
+            opacity: .3;
+            z-index: -99;
+            transition: all .2s;
+        }
+    
+        &:hover::after {
+            width: 80px;
+            height: 80px;
+        }
+    }
+}
+
+
+
+// ANIMATION
+
+@keyframes live-chat {
+    30%, 60%, 100% {
+        width: 70px;
+        height: 70px;
+    }
+
+    15%, 45% {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@keyframes myFadeInUp {
+    0% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.main-page-animation {
+    h1 { animation-duration: .5s; }
+
+    p {
+        animation-duration: .5s;
+        animation-delay: .3s;
+    }
+
+    ul {
+        li {
+            &:first-child {
+                animation-duration: .2s;
+                animation-delay: .8s;
+            }
+
+            &:nth-child(2) {
+                animation-duration: .2s;
+                animation-delay: .9s;
+            }
+
+            &:nth-child(3) {
+                animation-duration: .2s;
+                animation-delay: 1s;
+            }
+
+            &:last-child {
+                animation-duration: .2s;
+                animation-delay: 1.1s;
+            }
+        }
+    }
+}
+
+
+
+// CARD CLASSES
+
+%cards {
+    @extend .card-flex;
+    margin: 50px 0 30px;
+
+    .card-outer {
+        width: 300px;
+        padding: 0 10px;
+        margin-bottom: 20px;
+
+        .card {
+            transition: all .2s;
+            cursor: pointer;
+    
+            .image-box {
+                height: 152px;
+                overflow: hidden;
+                position: relative;
+        
+                img { transition: all .2s; }
+        
+                .layer {
+                    background-color: #C4C4C4;
+                    opacity: .2;
+                    transition: all .2s;
+                }
+            }
+    
+            .description {
+                padding: 20px;
+                transition: all .2s;
+    
+                p { margin: 20px 0; }
+        
+                a:hover { font-weight: bold; }
+            }
+    
+            &:hover {
+                box-shadow: 0 4px 16px rgba(0,0,0,.5);
+    
+                .layer { opacity: 0; }
+            }
+        }
+    }
+}
+
+.red-cards {
+    @extend %cards;
+
+    .card .description {
+        background-color: $color-red;
+    
+        h2 { @extend .h2-white; }
+        p { @extend .p-white; }
+        a { @extend .a-white; }
+    }
+
+    .card:hover .description {
+        background-color: $color-white;
+
+        h2, p, a { color: $color-dark-blue; }
+    }
+}
+
+.white-cards {
+    @extend %cards;
+
+    .card .description {
+        background-color: $color-white;
+
+        h2 {@extend .h2-blue;}
+        p { @extend .p-blue; }
+        a { @extend .a-blue; }
+    }
+
+    .card:hover .description {
+        background-color: $color-red;
+
+        h2, p, a { color: $color-white; }
+    }
+}

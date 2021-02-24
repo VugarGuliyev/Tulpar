@@ -1,0 +1,235 @@
+@import "reset";
+@import "mixins";
+@import "utilities";
+
+@include scrollbar;
+
+header {
+    background-image: url('../img/advice/advice-background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    .container {
+        padding: 0;
+
+        .top {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        
+            .logo-box { width: 206px; }
+
+            .bars {
+                width: 45px;
+                height: 45px;
+                position: relative;
+                transition: all .2s;
+                display: none;
+                cursor: pointer;
+        
+                i {
+                    font-size: 20px;
+                    color: white;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+                &:hover {background-color: $color-dark-blue;}
+                &:hover i { font-size: 25px; }
+            }
+
+            .focused {
+                background-color: $color-dark-blue;
+                
+                i {
+                    font-size: 25px;
+                    color: $color-white;
+                }
+            }
+        }
+
+        .bottom { padding: 100px 0 80px; }
+        .bottom h1 { max-width: 800px; }
+    }
+}
+
+section.advice {
+    background-color: $color-white;
+
+    .menu-holder {
+        background-color: $color-menu;
+        padding: 20px 0;
+
+        .section-menu {
+            max-width: 1180px;
+            margin: 0 auto;
+
+            a { color: $color-light-blue; }
+            a::after { background-color: transparent; }
+
+            li:not(:last-child) {
+                margin-right: 12px;
+
+                a:hover { color: $color-white; }
+            }
+
+            li:last-child a:hover {
+                font-weight: normal;
+                cursor: initial;   
+            }
+            
+            i {
+                margin-left: 12px;
+                vertical-align: middle;
+                color: $color-red;
+            }
+        }
+    }
+
+    article {
+        p { max-width: 720px; }
+        p:not(:last-child) { margin-bottom: 20px; }
+        img { width: 400px; }
+
+        .article1 { margin: 20px 0; }
+        .article1 img { float: right; }
+
+        .article2 img { float: left; }
+        .article2 p { margin-left: auto; }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        animation-name: myFadeInUp;
+        animation-duration: .3s;
+        animation-delay: .8s;
+        animation-fill-mode: both;
+    }
+}
+
+section.partners {
+    .partners-list {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+section.contacts {
+    background-color: $color-white;
+
+    .map {
+        margin: 50px 0;
+
+        iframe {
+            width: 100%;
+            height: 360px;
+            display: block;
+        }
+    }
+
+    .info {
+        display: flex;
+        flex-wrap: wrap;
+
+        h2 { margin-bottom: 20px; }
+        li:not(:last-child) { margin-bottom: 8px;}
+    } 
+}
+
+footer {
+    background-color: $color-footer;
+    position: relative;
+    z-index: 199;
+
+    .container {
+        padding: 40px 0;
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+
+            .site-map a { @include font-details($font400, 14px, $color-white); }
+
+            img.logo { width: 206px; }
+            h2 { margin-bottom: 20px; }
+            li:not(:last-child) { margin-bottom: 10px; }
+            a:hover { font-weight: bold; }
+
+            .contacts {
+                display: flex;
+                justify-content: space-between;
+
+
+                .to-top { 
+                    img {
+                        cursor: pointer;
+                        transition: all .2s;
+                        border-radius: 50%;
+    
+                        &:hover {
+                            transform: translateY(-10px);
+                            box-shadow: 0 10px 10px black;
+                        }
+                    }
+
+                    p { margin-top: 10px; }
+                }
+            }
+        }
+
+        .copyright { margin-top: 40px;}
+    } 
+}
+
+.button-instagram {
+    right: 400px;
+
+    .instagram { background-color: #C43A7C; }
+    .instagram::after { background-color: #C33A7C; }
+}
+
+.button-call {
+    right: 320px;
+
+    .call { background-color: #32495E; }
+    .call::after { background-color: #32495E; }
+}
+
+.button-email {
+    right: 240px;
+
+    .email { background-color: #4598FF; }
+    .email::after { background-color: #4598FF; }
+}
+
+.button-whatsapp {
+    right: 160px;
+
+    .whatsapp { background-color: #14AC51; }
+    .whatsapp::after { background-color: #14AC51; }
+}
+
+.button-chat {
+    right: 60px;
+
+    .chat { background-color: #E95258; }
+
+    .chat::after {
+        background-color: #E95258;
+        animation-name: live-chat;
+        animation-duration: .7s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .chat:hover::after { animation-name: none; }
+}
+
+@import 'advices-responsive'
